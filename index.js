@@ -1,8 +1,8 @@
 let express = require('express');
 let app = express();
 let http = require('http').Server(app);
-let io = require('socket.io')(http, {origins: '*:*'});
-
+let io = require('socket.io')(http);
+io.origins(['*://*/*'])
 io.on('connection', (socket) => {
     socket.on('disconnect' ,() => {
         io.emit('users-changed', {user: socket.eventNames, event: 'left'});
