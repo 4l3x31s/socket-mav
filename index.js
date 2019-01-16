@@ -1,6 +1,9 @@
 let app = require('express')();
+let cors = require('cors');
+app.use(cors());
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+
 
 io.on('connection', (socket) => {
     socket.on('disconnect' ,() => {
