@@ -1,9 +1,15 @@
-let app = require('express')();
+let express = require('express');
+let bodyParser = require('body-parser');
 let cors = require('cors');
+
+let app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
+
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
-
 
 io.on('connection', (socket) => {
     socket.on('disconnect' ,() => {
