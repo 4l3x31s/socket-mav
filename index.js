@@ -1,7 +1,7 @@
 let express = require('express');
 let app = express();
 let http = require('http').Server(app);
-let io = require('socket.io')(http, {origins: 'http://localhost:* http://127.0.0.1:*'});
+let io = require('socket.io')(http, {origins: '*://*/*'});
 
 io.on('connection', (socket) => {
     socket.on('disconnect' ,() => {
