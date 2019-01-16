@@ -1,16 +1,8 @@
 let express = require('express');
-let bodyParser = require('body-parser');
-let cors = require('cors');
-
 let app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(cors());
-
 let http = require('http').Server(app);
-let io = require('socket.io')(http);
-io.origins('*:*');
+let io = require('socket.io')(http, {origins: '*:*'});
+
 io.on('connection', (socket) => {
     socket.on('disconnect' ,() => {
         io.emit('users-changed', {user: socket.eventNames, event: 'left'});
